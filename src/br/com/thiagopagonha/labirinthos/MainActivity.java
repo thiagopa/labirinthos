@@ -1,5 +1,6 @@
-package br.com.thiagopagonha;
+package br.com.thiagopagonha.labirinthos;
 
+import br.com.thiagopagonha.labirinthos.R;
 import android.os.Bundle;
 import android.app.Activity;
 import android.view.Menu;
