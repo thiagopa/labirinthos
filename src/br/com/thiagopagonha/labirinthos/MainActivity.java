@@ -1,23 +1,51 @@
 package br.com.thiagopagonha.labirinthos;
 
-import br.com.thiagopagonha.labirinthos.R;
-import android.os.Bundle;
-import android.app.Activity;
-import android.view.Menu;
+import org.andengine.engine.camera.Camera;
+import org.andengine.engine.options.EngineOptions;
+import org.andengine.engine.options.ScreenOrientation;
+import org.andengine.engine.options.resolutionpolicy.FillResolutionPolicy;
+import org.andengine.entity.scene.Scene;
+import org.andengine.entity.scene.background.Background;
+import org.andengine.ui.activity.SimpleBaseGameActivity;
 
-public class MainActivity extends Activity {
+import android.util.Log;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);
+public class MainActivity extends SimpleBaseGameActivity {
+
+	public static final String TAG = "MainActivity";
+	
+	private Camera camera;
+	private static final int CAMERA_WIDTH = 800;
+	private static final int CAMERA_HEIGHT = 480;
+
+	public EngineOptions onCreateEngineOptions() {
+		Log.i(TAG, "onCreateEngineOptions()");
+
+		/*
+		 * Inicializa a câmera com os propriedades inseridas
+		 */
+		camera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
+		EngineOptions engineOptions = new EngineOptions(true,
+				ScreenOrientation.LANDSCAPE_FIXED, new FillResolutionPolicy(),
+				camera);
+
+		return engineOptions;
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.activity_main, menu);
-		return true;
+	protected void onCreateResources() {
+		Log.i(TAG, "onCreateResources()");
+	}
+
+	@Override
+	protected Scene onCreateScene() {
+		Log.i(TAG, "onCreateScene()");
+
+		Scene scene = new Scene();
+
+		scene.setBackground(new Background(0.09804f, 0.6274f, 0.8784f));
+
+		return scene;
 	}
 
 }
