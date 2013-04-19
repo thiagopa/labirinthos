@@ -1,0 +1,15 @@
+Gaming Concept
+
+Screen
+=====    =====
+|   |    |   
+|   | => |   
+|   |    |   
+=====    =====
+
+Features Key & Hints
+
+Dangers = Traps and enemies
+
+
+Entrance => Key => Locked Door => Exit
