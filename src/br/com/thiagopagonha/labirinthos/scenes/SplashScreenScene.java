@@ -2,10 +2,9 @@ package br.com.thiagopagonha.labirinthos.scenes;
 
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.text.Text;
-import org.andengine.opengl.font.Font;
 import org.andengine.util.color.Color;
 
-import br.com.thiagopagonha.labirinthos.MainActivity;
+import br.com.thiagopagonha.labirinthos.utils.GameResourcesFactory;
 
 /**
  * Tela principal que aparecerá quando o jogo for iniciado
@@ -16,15 +15,19 @@ import br.com.thiagopagonha.labirinthos.MainActivity;
  */
 public class SplashScreenScene extends SceneControls {
 
-	public SplashScreenScene(MainActivity mainActivity) {
-		super(mainActivity);
+	public SplashScreenScene(GameResourcesFactory gameResourcesFactory) {
+		super(gameResourcesFactory);
 	}
 
 	public void create() {
 		setBackground(new Background(Color.WHITE));
-		attachChild(new Text(400, 240, getMainActivity().getGameResources()
-				.get(Font.class), "Loading...", getMainActivity()
-				.getVertexBufferObjectManager()));
+		
+		// -- Cria textos da Tela
+		Text gameTitle = getGameResourcesFactory().createText(400,240,"Labirinthos");
+		Text authorName = getGameResourcesFactory().createText(600,420,"por Thiago Pagonha");
+		
+		attachChild(gameTitle);
+		attachChild(authorName);
 	}
 
 }

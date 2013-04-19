@@ -2,7 +2,7 @@ package br.com.thiagopagonha.labirinthos.scenes;
 
 import org.andengine.entity.scene.Scene;
 
-import br.com.thiagopagonha.labirinthos.MainActivity;
+import br.com.thiagopagonha.labirinthos.utils.GameResourcesFactory;
 
 /**
  * Controles relativos às cenas
@@ -17,17 +17,17 @@ public abstract class SceneControls extends Scene {
 	 */
 	protected abstract void create();
 	
-	private MainActivity mainActivity; 
+	private GameResourcesFactory gameResourcesFactory; 
 	
-	protected SceneControls(MainActivity mainActivity) {
+	protected SceneControls(GameResourcesFactory gameResourcesFactory) {
 		
-		this.mainActivity = mainActivity;
+		this.gameResourcesFactory = gameResourcesFactory;
 		
 		create();
 	}
 	
-	protected MainActivity getMainActivity() {
-		return this.mainActivity;
+	protected GameResourcesFactory getGameResourcesFactory() {
+		return gameResourcesFactory;
 	}
 	
 }
