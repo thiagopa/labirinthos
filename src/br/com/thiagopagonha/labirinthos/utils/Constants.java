@@ -14,6 +14,7 @@ public final class Constants {
 	}
 
 	public static final int MAX_FPS = 60;
-	public static final int CAMERA_WIDTH = 800;
-	public static final int CAMERA_HEIGHT = 480;
+	public static final float CAMERA_WIDTH = 800;
+	public static final float CAMERA_HEIGHT = 480;
+	public static final float FONT_SIZE = 50;
 }

@@ -1,6 +1,6 @@
 package br.com.thiagopagonha.labirinthos;
 
-import static br.com.thiagopagonha.labirinthos.utils.Constants.CAMERA_HEIGHT;
+import static br.com.thiagopagonha.labirinthos.utils.Constants.*;
 import static br.com.thiagopagonha.labirinthos.utils.Constants.CAMERA_WIDTH;
 import static br.com.thiagopagonha.labirinthos.utils.Constants.MAX_FPS;
 
@@ -65,7 +65,7 @@ public class MainActivity extends SimpleBaseGameActivity {
 	    FontFactory.setAssetBasePath("font/");
 	    final ITexture mainFontTexture = new BitmapTextureAtlas(this.getTextureManager(), 256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 
-	    Font font = FontFactory.createFromAsset(this.getFontManager(), mainFontTexture, this.getAssets(), "BUENAN__.ttf", 50, true, Color.BLACK);
+	    Font font = FontFactory.createFromAsset(this.getFontManager(), mainFontTexture, this.getAssets(), "BUENAN__.ttf", FONT_SIZE, true, Color.BLACK);
 	    font.load();
 	    
 	    gameResourcesFactory.add(Font.class, font);
