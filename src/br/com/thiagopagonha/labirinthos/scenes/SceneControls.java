@@ -3,6 +3,8 @@ package br.com.thiagopagonha.labirinthos.scenes;
 import org.andengine.engine.Engine;
 import org.andengine.entity.IEntity;
 import org.andengine.entity.scene.Scene;
+import org.andengine.entity.scene.background.Background;
+import org.andengine.util.color.Color;
 
 import android.util.Log;
 import br.com.thiagopagonha.labirinthos.utils.GameResourcesFactory;
@@ -27,7 +29,9 @@ public abstract class SceneControls extends Scene {
 	protected SceneControls(GameResourcesFactory gameResourcesFactory) {
 		
 		this.gameResourcesFactory = gameResourcesFactory;
-		
+		// -- Limpa a tela de fundo
+		setBackground(new Background(Color.WHITE));
+		// -- Cria os objetos referentes à cena
 		create();
 	}
 	

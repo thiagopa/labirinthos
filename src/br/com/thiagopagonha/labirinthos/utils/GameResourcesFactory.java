@@ -6,6 +6,7 @@ import java.util.Map;
 import org.andengine.entity.scene.menu.item.IMenuItem;
 import org.andengine.entity.scene.menu.item.TextMenuItem;
 import org.andengine.entity.text.Text;
+import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 
@@ -41,12 +42,24 @@ public class GameResourcesFactory {
 	}
 	
 	/**
-	 * Cria um item de botão
+	 * Usado para marcar a ação do clique do botão 
+	 */
+	public interface ITouchArea {
+		boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY);
+	}
+	
+	/**
+	 * Cria um item de botão com determina ação
 	 * @param pID
 	 * @param text
+	 * @param onTouch
 	 * @return
 	 */
-	public IMenuItem createTextMenuItem(int pID, String text) {
-		return new TextMenuItem(pID,get(Font.class),text, get(VertexBufferObjectManager.class));
+	public IMenuItem createTextMenuItem(int pID, String text, final ITouchArea onTouch) {
+		return new TextMenuItem(pID,get(Font.class),text, get(VertexBufferObjectManager.class)) {
+			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
+				return onTouch.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX, pTouchAreaLocalY);
+			}
+		};
 	}
 }

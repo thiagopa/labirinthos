@@ -3,13 +3,12 @@ package br.com.thiagopagonha.labirinthos.scenes;
 import static br.com.thiagopagonha.labirinthos.utils.Constants.CAMERA_HEIGHT;
 import static br.com.thiagopagonha.labirinthos.utils.Constants.CAMERA_WIDTH;
 
-import org.andengine.entity.scene.IOnSceneTouchListener;
+import org.andengine.entity.scene.ITouchArea;
 import org.andengine.entity.scene.Scene;
-import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.scene.menu.item.IMenuItem;
 import org.andengine.input.touch.TouchEvent;
-import org.andengine.util.color.Color;
 
+import android.util.Log;
 import br.com.thiagopagonha.labirinthos.utils.GameResourcesFactory;
 
 /**
@@ -19,28 +18,31 @@ import br.com.thiagopagonha.labirinthos.utils.GameResourcesFactory;
  * @version Abr/2013
  * 
  */
-public class MenuScene extends SceneControls implements IOnSceneTouchListener {
+public class MenuScene extends SceneControls {
 
+	public static final String TAG = "MenuScene";
+	
 	protected MenuScene(GameResourcesFactory gameResourcesFactory) {
 		super(gameResourcesFactory);
 	}
 
 	protected void create() {
-		setBackground(new Background(Color.WHITE));
-
-		IMenuItem playMenuItem = getGameResourcesFactory().createTextMenuItem(0, "Jogar");
-
+		// -- Cria o botão do menu e associa uma ação a ele
+		IMenuItem playMenuItem = getGameResourcesFactory().createTextMenuItem(0, "Jogar", new GameResourcesFactory.ITouchArea() {
+			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,float pTouchAreaLocalX, float pTouchAreaLocalY) {
+				Log.i(TAG,"Touch Coordinates x=" + pSceneTouchEvent.getX() + " y=" + pSceneTouchEvent.getY() + " and isActionUP = " + pSceneTouchEvent.isActionUp());
+				// -- Muda a cena para outra 
+				changeScene(LevelSelectScene.class);
+				
+				return true;
+			}
+		}); 
+		// -- registra o toque do botão na cena
+		registerTouchArea(playMenuItem);
+		// -- Coloca o botão na posição
 		playMenuItem.setPosition(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
-
+		// -- Insere o botão na cena
 		attachChild(playMenuItem);
 
-		setOnSceneTouchListener(this);
 	}
-
-	@Override
-	public boolean onSceneTouchEvent(Scene pScene, TouchEvent pSceneTouchEvent) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }
