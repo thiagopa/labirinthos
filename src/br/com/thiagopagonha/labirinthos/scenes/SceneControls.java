@@ -1,6 +1,7 @@
 package br.com.thiagopagonha.labirinthos.scenes;
 
 import org.andengine.engine.Engine;
+import org.andengine.entity.IEntity;
 import org.andengine.entity.scene.Scene;
 
 import android.util.Log;
@@ -40,17 +41,21 @@ public abstract class SceneControls extends Scene {
 	protected void changeScene(Class<? extends SceneControls> newScene) {
 		
 		try {
+			// -- Criando a nova cena com o gamesResourceFactory => new SceneControls(gameResourcesFactory);
 			SceneControls newSceneControls = newScene.getDeclaredConstructor(GameResourcesFactory.class).newInstance(gameResourcesFactory);
 			Engine engine = gameResourcesFactory.get(Engine.class);
 			
-			this.dispose();
+			// -- Remove toda a sujeira da cena
+			detachChildren();
+			clearEntityModifiers();
+			clearTouchAreas();
+			clearUpdateHandlers();
 			
+			// -- Troca a cena pela engine
 			engine.setScene(newSceneControls);
 		} catch (Exception e) {
 			Log.e(TAG, "Pego a exceção =" + e.getMessage() + " , matando a aplicação agora!");
 			System.exit(-1);
 		}
 	}
-	
-	
 }
