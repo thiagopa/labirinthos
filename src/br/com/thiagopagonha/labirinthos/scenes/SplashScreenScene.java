@@ -1,13 +1,18 @@
 package br.com.thiagopagonha.labirinthos.scenes;
 
+import static br.com.thiagopagonha.labirinthos.utils.Constants.CAMERA_HEIGHT;
+import static br.com.thiagopagonha.labirinthos.utils.Constants.CAMERA_WIDTH;
+import static br.com.thiagopagonha.labirinthos.utils.Constants.FONT_SIZE;
+
+import org.andengine.engine.Engine;
+import org.andengine.engine.handler.timer.ITimerCallback;
+import org.andengine.engine.handler.timer.TimerHandler;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.text.Text;
 import org.andengine.util.HorizontalAlign;
 import org.andengine.util.color.Color;
 
 import br.com.thiagopagonha.labirinthos.utils.GameResourcesFactory;
-
-import static br.com.thiagopagonha.labirinthos.utils.Constants.*;
 
 /**
  * Tela principal que aparecerá quando o jogo for iniciado
@@ -33,6 +38,21 @@ public class SplashScreenScene extends SceneControls {
 		
 		attachChild(gameTitle);
 		attachChild(authorName);
+		
+		// -- Cria um timer para a splash por 3 segundos
+		
+		final Engine engine = getGameResourcesFactory().get(Engine.class);
+		
+		engine.registerUpdateHandler(new TimerHandler(3f, new ITimerCallback() 
+		{
+		    public void onTimePassed(final TimerHandler pTimerHandler) 
+		    {
+		        engine.unregisterUpdateHandler(pTimerHandler);
+		        changeScene(MenuScene.class);
+		    }
+		}));
+
+		
 	}
 
 }

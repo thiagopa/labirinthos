@@ -3,6 +3,8 @@ package br.com.thiagopagonha.labirinthos.utils;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.andengine.entity.scene.menu.item.IMenuItem;
+import org.andengine.entity.scene.menu.item.TextMenuItem;
 import org.andengine.entity.text.Text;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
@@ -38,6 +40,13 @@ public class GameResourcesFactory {
 		return new Text(pX, pY, get(Font.class), string , get(VertexBufferObjectManager.class));
 	}
 	
-	
-	
+	/**
+	 * Cria um item de botão
+	 * @param pID
+	 * @param text
+	 * @return
+	 */
+	public IMenuItem createTextMenuItem(int pID, String text) {
+		return new TextMenuItem(pID,get(Font.class),text, get(VertexBufferObjectManager.class));
+	}
 }
