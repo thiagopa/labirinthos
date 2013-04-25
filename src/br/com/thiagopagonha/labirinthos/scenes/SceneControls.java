@@ -42,11 +42,11 @@ public abstract class SceneControls extends Scene {
 	/**
 	 * Ação relativa ao processamento da cena
 	 */
-	protected void changeScene(Class<? extends SceneControls> newScene) {
+	protected void changeScene(Class<? extends SceneControls> newScene, Object...params) {
 		
 		try {
 			// -- Criando a nova cena com o gamesResourceFactory => new SceneControls(gameResourcesFactory);
-			SceneControls newSceneControls = newScene.getDeclaredConstructor(GameResourcesFactory.class).newInstance(gameResourcesFactory);
+			SceneControls newSceneControls = newScene.getDeclaredConstructor(GameResourcesFactory.class).newInstance(gameResourcesFactory,params);
 			Engine engine = gameResourcesFactory.get(Engine.class);
 			
 			// -- Remove toda a sujeira da cena

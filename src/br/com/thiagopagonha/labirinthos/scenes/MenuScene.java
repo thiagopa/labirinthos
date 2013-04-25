@@ -3,8 +3,6 @@ package br.com.thiagopagonha.labirinthos.scenes;
 import static br.com.thiagopagonha.labirinthos.utils.Constants.CAMERA_HEIGHT;
 import static br.com.thiagopagonha.labirinthos.utils.Constants.CAMERA_WIDTH;
 
-import org.andengine.entity.scene.ITouchArea;
-import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.menu.item.IMenuItem;
 import org.andengine.input.touch.TouchEvent;
 
@@ -31,10 +29,13 @@ public class MenuScene extends SceneControls {
 		IMenuItem playMenuItem = getGameResourcesFactory().createTextMenuItem(0, "Jogar", new GameResourcesFactory.ITouchArea() {
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent,float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				Log.i(TAG,"Touch Coordinates x=" + pSceneTouchEvent.getX() + " y=" + pSceneTouchEvent.getY() + " and isActionUP = " + pSceneTouchEvent.isActionUp());
-				// -- Muda a cena para outra 
-				changeScene(LevelSelectScene.class);
+				// -- Muda a cena para outra só se o usuário tirar o dedo da tela!!! 
+				if(pSceneTouchEvent.isActionUp()) {
+					changeScene(LevelSelectScene.class);
+					return true;
+				}
 				
-				return true;
+				return false;
 			}
 		}); 
 		// -- registra o toque do botão na cena
