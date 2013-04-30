@@ -3,6 +3,7 @@ package br.com.thiagopagonha.labirinthos.utils;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.menu.item.IMenuItem;
 import org.andengine.entity.scene.menu.item.TextMenuItem;
 import org.andengine.entity.text.Text;
@@ -39,6 +40,18 @@ public class GameResourcesFactory {
 	 */
 	public Text createText(float pX, float pY, String string) {
 		return new Text(pX, pY, get(Font.class), string , get(VertexBufferObjectManager.class));
+	}
+	
+	/**
+	 * 
+	 * @param pX
+	 * @param pY
+	 * @param pWidth
+	 * @param pHeight
+	 * @return
+	 */
+	public Rectangle createRectangle(float pX, float pY, float pWidth, float pHeight) {
+		return new Rectangle(pX, pY, pWidth, pHeight, get(VertexBufferObjectManager.class));
 	}
 	
 	/**

@@ -1,7 +1,6 @@
 package br.com.thiagopagonha.labirinthos.scenes;
 
 import org.andengine.engine.Engine;
-import org.andengine.entity.IEntity;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.util.color.Color;
@@ -17,7 +16,7 @@ import br.com.thiagopagonha.labirinthos.utils.GameResourcesFactory;
  */
 public abstract class SceneControls extends Scene {
 
-	public static final String TAG = "SceneControls";
+	private static final String TAG = "SceneControls";
 	
 	/**
 	 * Ação relativa à criação da cena
@@ -42,11 +41,11 @@ public abstract class SceneControls extends Scene {
 	/**
 	 * Ação relativa ao processamento da cena
 	 */
-	protected void changeScene(Class<? extends SceneControls> newScene, Object...params) {
+	protected void changeScene(Class<? extends SceneControls> newScene) {
 		
 		try {
 			// -- Criando a nova cena com o gamesResourceFactory => new SceneControls(gameResourcesFactory);
-			SceneControls newSceneControls = newScene.getDeclaredConstructor(GameResourcesFactory.class).newInstance(gameResourcesFactory,params);
+			SceneControls newSceneControls = newScene.getDeclaredConstructor(GameResourcesFactory.class).newInstance(gameResourcesFactory);
 			Engine engine = gameResourcesFactory.get(Engine.class);
 			
 			// -- Remove toda a sujeira da cena
@@ -54,6 +53,7 @@ public abstract class SceneControls extends Scene {
 			clearEntityModifiers();
 			clearTouchAreas();
 			clearUpdateHandlers();
+			detachSelf();
 			
 			// -- Troca a cena pela engine
 			engine.setScene(newSceneControls);

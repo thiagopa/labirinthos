@@ -7,10 +7,8 @@ import static br.com.thiagopagonha.labirinthos.utils.Constants.FONT_SIZE;
 import org.andengine.engine.Engine;
 import org.andengine.engine.handler.timer.ITimerCallback;
 import org.andengine.engine.handler.timer.TimerHandler;
-import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.text.Text;
 import org.andengine.util.HorizontalAlign;
-import org.andengine.util.color.Color;
 
 import br.com.thiagopagonha.labirinthos.utils.GameResourcesFactory;
 

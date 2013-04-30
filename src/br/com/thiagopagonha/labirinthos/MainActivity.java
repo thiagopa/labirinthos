@@ -33,7 +33,7 @@ import br.com.thiagopagonha.labirinthos.utils.GameResourcesFactory;
  */
 public class MainActivity extends SimpleBaseGameActivity {
 
-	public static final String TAG = "MainActivity";
+	private static final String TAG = "MainActivity";
 	
 	// -- Usado como um container de todos os recursos importantes 
 	private GameResourcesFactory gameResourcesFactory = new GameResourcesFactory();

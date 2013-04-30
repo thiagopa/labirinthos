@@ -20,7 +20,7 @@ public class MenuScene extends SceneControls {
 
 	public static final String TAG = "MenuScene";
 	
-	protected MenuScene(GameResourcesFactory gameResourcesFactory) {
+	MenuScene(GameResourcesFactory gameResourcesFactory) {
 		super(gameResourcesFactory);
 	}
 

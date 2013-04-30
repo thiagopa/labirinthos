@@ -4,11 +4,9 @@ import static br.com.thiagopagonha.labirinthos.utils.Constants.CAMERA_HEIGHT;
 import static br.com.thiagopagonha.labirinthos.utils.Constants.CAMERA_WIDTH;
 
 import org.andengine.entity.scene.menu.item.IMenuItem;
-import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 
 import android.util.Log;
-import br.com.thiagopagonha.labirinthos.MainActivity;
 import br.com.thiagopagonha.labirinthos.data.LevelData;
 import br.com.thiagopagonha.labirinthos.data.LevelOneGameData;
 import br.com.thiagopagonha.labirinthos.utils.GameResourcesFactory;
@@ -22,7 +20,9 @@ import br.com.thiagopagonha.labirinthos.utils.GameResourcesFactory;
  */
 public class LevelSelectScene extends SceneControls {
 
-	protected LevelSelectScene(GameResourcesFactory gameResourcesFactory) {
+	private static final String TAG = "LevelSelectScene";
+	
+	LevelSelectScene(GameResourcesFactory gameResourcesFactory) {
 		super(gameResourcesFactory);
 	}
 
@@ -50,7 +50,8 @@ public class LevelSelectScene extends SceneControls {
 			Log.i(TAG,"Touch Coordinates x=" + pSceneTouchEvent.getX() + " y=" + pSceneTouchEvent.getY() + " and isActionUP = " + pSceneTouchEvent.isActionUp());
 			// -- Muda a cena para outra só se o usuário tirar o dedo da tela!!! 
 			if(pSceneTouchEvent.isActionUp()) {
-				changeScene(GameScene.class,gameData);
+				getGameResourcesFactory().add(LevelData.class, gameData);
+				changeScene(GameScene.class);
 				return true;
 			}
 			
