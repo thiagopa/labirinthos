@@ -50,7 +50,7 @@ public class GameScene extends SceneControls {
 		gameHUD.attachChild(levelTitle);
 		
 		// -- Retângulo da tela
-		Entity rectangleScreen = getGameResourcesFactory().createRectangle(240, 240 , 100, 100, Color.BLUE);
+		Entity rectangleScreen = getGameResourcesFactory().createRectangle(200, 100 , 400, 250, Color.BLUE);
 		gameHUD.attachChild(rectangleScreen);
 		
 		// -- Gruda o HUD à Câmera
