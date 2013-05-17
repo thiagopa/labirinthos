@@ -2,7 +2,7 @@ package br.com.thiagopagonha.labirinthos.scenes;
 
 import org.andengine.engine.camera.Camera;
 import org.andengine.engine.camera.hud.HUD;
-import org.andengine.entity.primitive.Rectangle;
+import org.andengine.entity.Entity;
 import org.andengine.entity.text.Text;
 import org.andengine.util.color.Color;
 
@@ -50,9 +50,8 @@ public class GameScene extends SceneControls {
 		gameHUD.attachChild(levelTitle);
 		
 		// -- Retângulo da tela
-		Rectangle screen = getGameResourcesFactory().createRectangle(240, 240 , 100, 100);
-		screen.setColor(Color.BLUE);
-		gameHUD.attachChild(screen);
+		Entity rectangleScreen = getGameResourcesFactory().createRectangle(240, 240 , 100, 100, Color.BLUE);
+		gameHUD.attachChild(rectangleScreen);
 		
 		// -- Gruda o HUD à Câmera
 		Camera camera = getGameResourcesFactory().get(Camera.class);

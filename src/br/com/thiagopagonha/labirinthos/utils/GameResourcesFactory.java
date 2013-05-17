@@ -3,13 +3,15 @@ package br.com.thiagopagonha.labirinthos.utils;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.andengine.entity.primitive.Rectangle;
+import org.andengine.entity.Entity;
+import org.andengine.entity.primitive.Line;
 import org.andengine.entity.scene.menu.item.IMenuItem;
 import org.andengine.entity.scene.menu.item.TextMenuItem;
 import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
+import org.andengine.util.color.Color;
 
 /**
  * Usado para gerenciar o acesso à todos os recursos do jogo
@@ -43,15 +45,38 @@ public class GameResourcesFactory {
 	}
 	
 	/**
-	 * 
-	 * @param pX
-	 * @param pY
-	 * @param pWidth
-	 * @param pHeight
-	 * @return
+	 * Cria um retângulo apenas com bordas e a cor específica
+	 * @param pX, horizontal começo
+	 * @param pY, vertical começo
+	 * @param pWidth, a largura
+	 * @param pHeight, a altura
+	 * @param pColor, a cor
+	 * @return <Entity>
 	 */
-	public Rectangle createRectangle(float pX, float pY, float pWidth, float pHeight) {
-		return new Rectangle(pX, pY, pWidth, pHeight, get(VertexBufferObjectManager.class));
+	public Entity createRectangle(float pX, float pY, float pWidth, float pHeight, Color pColor) {
+		//return new Rectangle(pX, pY, pWidth, pHeight, get(VertexBufferObjectManager.class));
+		VertexBufferObjectManager vbom = get(VertexBufferObjectManager.class);
+		
+		Entity rectangleScreen = new Entity(0, 0);
+		
+		Line topLine = new Line(pX, pY, pX + pWidth, pY, vbom);
+		topLine.setColor(pColor);
+		
+		Line bottomLine = new Line(pX, pY + pHeight , pX +pWidth , pY + pHeight, vbom);
+		bottomLine.setColor(pColor);
+
+		Line leftLine = new Line(pX, pY, pX, pY + pHeight, vbom);
+		leftLine.setColor(pColor);
+
+		Line rightLine = new Line(pX + pWidth, pY, pX + pWidth, pY + pHeight, vbom);
+		rightLine.setColor(pColor);
+		
+		rectangleScreen.attachChild(topLine);
+		rectangleScreen.attachChild(bottomLine);
+		rectangleScreen.attachChild(leftLine);
+		rectangleScreen.attachChild(rightLine);
+		
+		return rectangleScreen;
 	}
 	
 	/**
