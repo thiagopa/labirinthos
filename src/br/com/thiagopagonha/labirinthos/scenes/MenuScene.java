@@ -1,7 +1,6 @@
 package br.com.thiagopagonha.labirinthos.scenes;
 
 import static br.com.thiagopagonha.labirinthos.utils.Constants.CAMERA_HEIGHT;
-import static br.com.thiagopagonha.labirinthos.utils.Constants.CAMERA_WIDTH;
 
 import org.andengine.entity.scene.menu.item.IMenuItem;
 import org.andengine.entity.sprite.Sprite;
@@ -29,7 +28,7 @@ public class MenuScene extends SceneControls {
 
 	protected void create() {
 		// -- Cria um ícone na tela
-		Sprite puzzle = get(SpriteFactory.class).createSprite("puzzle.png", 50, 50);
+		Sprite puzzle = get(SpriteFactory.class).createSprite("puzzle.png", 0, 0);
 		attachChild(puzzle);
 		
 		// -- Cria o botão do menu e associa uma ação a ele
@@ -48,7 +47,7 @@ public class MenuScene extends SceneControls {
 		// -- registra o toque do botão na cena
 		registerTouchArea(playMenuItem);
 		// -- Coloca o botão na posição
-		playMenuItem.setPosition(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
+		playMenuItem.setPosition(500, CAMERA_HEIGHT / 2);
 		// -- Insere o botão na cena
 		attachChild(playMenuItem);
 
