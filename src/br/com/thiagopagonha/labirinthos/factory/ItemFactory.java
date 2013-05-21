@@ -51,21 +51,21 @@ public class ItemFactory {
 	 * @param pColor, a cor
 	 * @return <Entity>
 	 */
-	public Entity createRectangle(float pX, float pY, float pWidth, float pHeight, Color pColor) {
+	public Entity createRectangle(float pX, float pY, float pWidth, float pHeight, float lineWidth, Color pColor) {
 		Log.d(TAG, "createRectangle()");
 		//return new Rectangle(pX, pY, pWidth, pHeight, get(VertexBufferObjectManager.class));
 		Entity rectangleScreen = new Entity(0, 0);
 		
-		Line topLine = new Line(pX, pY, pX + pWidth, pY, vertexBufferObjectManager);
+		Line topLine = new Line(pX, pY, pX + pWidth, pY, lineWidth, vertexBufferObjectManager);
 		topLine.setColor(pColor);
 		
-		Line bottomLine = new Line(pX, pY + pHeight , pX +pWidth , pY + pHeight, vertexBufferObjectManager);
+		Line bottomLine = new Line(pX, pY + pHeight , pX +pWidth , pY + pHeight, lineWidth, vertexBufferObjectManager);
 		bottomLine.setColor(pColor);
 
-		Line leftLine = new Line(pX, pY, pX, pY + pHeight, vertexBufferObjectManager);
+		Line leftLine = new Line(pX, pY, pX, pY + pHeight, lineWidth, vertexBufferObjectManager);
 		leftLine.setColor(pColor);
 
-		Line rightLine = new Line(pX + pWidth, pY, pX + pWidth, pY + pHeight, vertexBufferObjectManager);
+		Line rightLine = new Line(pX + pWidth, pY, pX + pWidth, pY + pHeight, lineWidth, vertexBufferObjectManager);
 		rightLine.setColor(pColor);
 		
 		rectangleScreen.attachChild(topLine);

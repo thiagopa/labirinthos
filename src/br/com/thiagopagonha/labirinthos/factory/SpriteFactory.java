@@ -49,7 +49,6 @@ public class SpriteFactory {
 			ITexture texture;
 			ITextureRegion textureRegion;
             texture = new BitmapTexture(textureManager, new IInputStreamOpener() {
-                @Override
                 public InputStream open() throws IOException {
                     return assetManager.open("gfx/"+fileName);
                 }
