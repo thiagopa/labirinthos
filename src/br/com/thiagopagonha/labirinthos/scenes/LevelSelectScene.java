@@ -9,7 +9,8 @@ import org.andengine.input.touch.TouchEvent;
 import android.util.Log;
 import br.com.thiagopagonha.labirinthos.data.LevelData;
 import br.com.thiagopagonha.labirinthos.data.LevelOneGameData;
-import br.com.thiagopagonha.labirinthos.utils.GameResourcesFactory;
+import br.com.thiagopagonha.labirinthos.factory.GameResourcesFactory;
+import br.com.thiagopagonha.labirinthos.factory.ItemFactory;
 
 /**
  * Cena que cuida da seleção das fases
@@ -29,7 +30,7 @@ public class LevelSelectScene extends SceneControls {
 	@Override
 	protected void create() {
 		// -- Cria o botão do menu e associa uma ação a ele
-		IMenuItem levelOne = getGameResourcesFactory().createTextMenuItem(0, "Level One", new GameSceneButton(new LevelOneGameData())); 
+		IMenuItem levelOne = get(ItemFactory.class).createTextMenuItem(0, "Level One", new GameSceneButton(new LevelOneGameData())); 
 		// -- registra o toque do botão na cena
 		registerTouchArea(levelOne);
 		// -- Coloca o botão na posição
@@ -38,7 +39,7 @@ public class LevelSelectScene extends SceneControls {
 		attachChild(levelOne);
 	}
 	
-	class GameSceneButton implements GameResourcesFactory.ITouchArea {
+	class GameSceneButton implements ItemFactory.ITouchArea {
 		
 		private LevelData gameData;
 		

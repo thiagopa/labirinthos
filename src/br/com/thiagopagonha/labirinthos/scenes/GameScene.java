@@ -7,7 +7,8 @@ import org.andengine.entity.text.Text;
 import org.andengine.util.color.Color;
 
 import br.com.thiagopagonha.labirinthos.data.LevelData;
-import br.com.thiagopagonha.labirinthos.utils.GameResourcesFactory;
+import br.com.thiagopagonha.labirinthos.factory.GameResourcesFactory;
+import br.com.thiagopagonha.labirinthos.factory.ItemFactory;
 
 /**
  * Cena principal e implementação do jogo
@@ -34,7 +35,7 @@ public class GameScene extends SceneControls {
 	 */
 	protected void create() {
 		// -- Inicializando os dados do jogo
-		levelData = getGameResourcesFactory().get(LevelData.class);
+		levelData = get(LevelData.class);
 		
 		// -- Inicializa o Heads Up Display
 		createHUD();
@@ -45,16 +46,16 @@ public class GameScene extends SceneControls {
 		gameHUD = new HUD();
 
 		// -- Título da fase
-		Text levelTitle = getGameResourcesFactory().createText(0, 0, levelData.levelName());
+		Text levelTitle = get(ItemFactory.class).createText(0, 0, levelData.levelName());
 		levelTitle.setColor(Color.RED);
 		gameHUD.attachChild(levelTitle);
 		
 		// -- Retângulo da tela
-		Entity rectangleScreen = getGameResourcesFactory().createRectangle(200, 100 , 400, 250, Color.BLUE);
+		Entity rectangleScreen = get(ItemFactory.class).createRectangle(200, 100 , 400, 250, Color.BLACK);
 		gameHUD.attachChild(rectangleScreen);
 		
 		// -- Gruda o HUD à Câmera
-		Camera camera = getGameResourcesFactory().get(Camera.class);
+		Camera camera = get(Camera.class);
 		camera.setHUD(gameHUD);
 	}
 	

@@ -21,8 +21,10 @@ import org.andengine.ui.activity.SimpleBaseGameActivity;
 
 import android.graphics.Color;
 import android.util.Log;
+import br.com.thiagopagonha.labirinthos.factory.GameResourcesFactory;
+import br.com.thiagopagonha.labirinthos.factory.ItemFactory;
+import br.com.thiagopagonha.labirinthos.factory.SpriteFactory;
 import br.com.thiagopagonha.labirinthos.scenes.SplashScreenScene;
-import br.com.thiagopagonha.labirinthos.utils.GameResourcesFactory;
 
 /**
  * Atividade Principal da Aplicação
@@ -65,7 +67,7 @@ public class MainActivity extends SimpleBaseGameActivity {
 	    FontFactory.setAssetBasePath("font/");
 	    final ITexture mainFontTexture = new BitmapTextureAtlas(this.getTextureManager(), 256, 256, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 
-	    Font font = FontFactory.createFromAsset(this.getFontManager(), mainFontTexture, this.getAssets(), "BUENAN__.ttf", FONT_SIZE, true, Color.BLACK);
+	    Font font = FontFactory.createFromAsset(this.getFontManager(), mainFontTexture, this.getAssets(), "SuperMarioBros.ttf", FONT_SIZE, true, Color.BLACK);
 	    font.load();
 	    
 	    gameResourcesFactory.add(Font.class, font);
@@ -99,7 +101,12 @@ public class MainActivity extends SimpleBaseGameActivity {
 	}
 
 	private void init() {
+		Log.i(TAG, "init()");
 		gameResourcesFactory.add(VertexBufferObjectManager.class, getVertexBufferObjectManager());
+		
+		// -- Inicializa as fábricas
+		gameResourcesFactory.add(ItemFactory.class, new ItemFactory(gameResourcesFactory.get(Font.class), getVertexBufferObjectManager()));
+		gameResourcesFactory.add(SpriteFactory.class, new SpriteFactory(getVertexBufferObjectManager(),getTextureManager(), getAssets()));
 		
 	}
 

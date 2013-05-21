@@ -6,7 +6,7 @@ import org.andengine.entity.scene.background.Background;
 import org.andengine.util.color.Color;
 
 import android.util.Log;
-import br.com.thiagopagonha.labirinthos.utils.GameResourcesFactory;
+import br.com.thiagopagonha.labirinthos.factory.GameResourcesFactory;
 
 /**
  * Controles relativos às cenas
@@ -33,9 +33,14 @@ public abstract class SceneControls extends Scene {
 		// -- Cria os objetos referentes à cena
 		create();
 	}
-	
+
 	protected GameResourcesFactory getGameResourcesFactory() {
 		return gameResourcesFactory;
+	}
+	
+	// -- Shortcut
+	protected <T> T get(Class<T> clazz) {
+		return gameResourcesFactory.get(clazz);
 	}
 	
 	/**

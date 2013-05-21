@@ -1,7 +1,4 @@
-package br.com.thiagopagonha.labirinthos.utils;
-
-import java.util.HashMap;
-import java.util.Map;
+package br.com.thiagopagonha.labirinthos.factory;
 
 import org.andengine.entity.Entity;
 import org.andengine.entity.primitive.Line;
@@ -13,26 +10,26 @@ import org.andengine.opengl.font.Font;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.util.color.Color;
 
+import android.util.Log;
+
 /**
- * Usado para gerenciar o acesso à todos os recursos do jogo
- * Só é permitido um tipo de objeto por vez e abstrai a criação de algum deles 
- * 
+ * Fábrica de Itens comuns e utilitários
  * @author Thiago Pagonha
- * @version Abr/2013
+ * @version Mai/2013
  *
  */
-public class GameResourcesFactory {
+public class ItemFactory {
 
-	private Map<Class, Object> repository = new HashMap<Class, Object>();
+	private static final String TAG = "ItemFactory";
 	
-	public <T> void add(Class<T> clazz, T obj) {
-		this.repository.put(clazz, obj);
+	private Font font;
+	private VertexBufferObjectManager vertexBufferObjectManager;
+	
+	public ItemFactory(Font font, VertexBufferObjectManager vertexBufferObjectManager) {
+		this.font = font;
+		this.vertexBufferObjectManager = vertexBufferObjectManager;
 	}
-
-	public <T> T get(Class<T> clazz) {
-		return (T) this.repository.get(clazz);
-	}
-
+	
 	/**
 	 * Cria um texto nas coordenadas
 	 * @param pX
@@ -41,7 +38,8 @@ public class GameResourcesFactory {
 	 * @return
 	 */
 	public Text createText(float pX, float pY, String string) {
-		return new Text(pX, pY, get(Font.class), string , get(VertexBufferObjectManager.class));
+		Log.d(TAG, "createText()");
+		return new Text(pX, pY, font, string , vertexBufferObjectManager);
 	}
 	
 	/**
@@ -54,21 +52,20 @@ public class GameResourcesFactory {
 	 * @return <Entity>
 	 */
 	public Entity createRectangle(float pX, float pY, float pWidth, float pHeight, Color pColor) {
+		Log.d(TAG, "createRectangle()");
 		//return new Rectangle(pX, pY, pWidth, pHeight, get(VertexBufferObjectManager.class));
-		VertexBufferObjectManager vbom = get(VertexBufferObjectManager.class);
-		
 		Entity rectangleScreen = new Entity(0, 0);
 		
-		Line topLine = new Line(pX, pY, pX + pWidth, pY, vbom);
+		Line topLine = new Line(pX, pY, pX + pWidth, pY, vertexBufferObjectManager);
 		topLine.setColor(pColor);
 		
-		Line bottomLine = new Line(pX, pY + pHeight , pX +pWidth , pY + pHeight, vbom);
+		Line bottomLine = new Line(pX, pY + pHeight , pX +pWidth , pY + pHeight, vertexBufferObjectManager);
 		bottomLine.setColor(pColor);
 
-		Line leftLine = new Line(pX, pY, pX, pY + pHeight, vbom);
+		Line leftLine = new Line(pX, pY, pX, pY + pHeight, vertexBufferObjectManager);
 		leftLine.setColor(pColor);
 
-		Line rightLine = new Line(pX + pWidth, pY, pX + pWidth, pY + pHeight, vbom);
+		Line rightLine = new Line(pX + pWidth, pY, pX + pWidth, pY + pHeight, vertexBufferObjectManager);
 		rightLine.setColor(pColor);
 		
 		rectangleScreen.attachChild(topLine);
@@ -94,10 +91,13 @@ public class GameResourcesFactory {
 	 * @return
 	 */
 	public IMenuItem createTextMenuItem(int pID, String text, final ITouchArea onTouch) {
-		return new TextMenuItem(pID,get(Font.class),text, get(VertexBufferObjectManager.class)) {
+		Log.d(TAG, "createTextMenuItem()");
+		return new TextMenuItem(pID,font,text, vertexBufferObjectManager) {
 			public boolean onAreaTouched(TouchEvent pSceneTouchEvent, float pTouchAreaLocalX, float pTouchAreaLocalY) {
 				return onTouch.onAreaTouched(pSceneTouchEvent, pTouchAreaLocalX, pTouchAreaLocalY);
 			}
 		};
 	}
+
+	
 }

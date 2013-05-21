@@ -10,7 +10,8 @@ import org.andengine.engine.handler.timer.TimerHandler;
 import org.andengine.entity.text.Text;
 import org.andengine.util.HorizontalAlign;
 
-import br.com.thiagopagonha.labirinthos.utils.GameResourcesFactory;
+import br.com.thiagopagonha.labirinthos.factory.GameResourcesFactory;
+import br.com.thiagopagonha.labirinthos.factory.ItemFactory;
 
 /**
  * Tela principal que aparecerá quando o jogo for iniciado
@@ -27,8 +28,8 @@ public class SplashScreenScene extends SceneControls {
 
 	public void create() {
 		// -- Cria textos da Tela
-		Text gameTitle = getGameResourcesFactory().createText(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2,"Labirinthos");
-		Text authorName = getGameResourcesFactory().createText(CAMERA_WIDTH - (CAMERA_WIDTH/3),CAMERA_HEIGHT - FONT_SIZE * 2,"por Thiago Pagonha");
+		Text gameTitle = get(ItemFactory.class).createText(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2,"Labirinthos");
+		Text authorName = get(ItemFactory.class).createText(0,CAMERA_HEIGHT - FONT_SIZE * 2,"por Thiago Pagonha");
 		
 		authorName.setHorizontalAlign(HorizontalAlign.RIGHT);
 		
@@ -37,7 +38,7 @@ public class SplashScreenScene extends SceneControls {
 		
 		// -- Cria um timer para a splash por 3 segundos
 		
-		final Engine engine = getGameResourcesFactory().get(Engine.class);
+		final Engine engine = get(Engine.class);
 		
 		engine.registerUpdateHandler(new TimerHandler(3f, new ITimerCallback() 
 		{
