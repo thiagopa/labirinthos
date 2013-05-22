@@ -12,6 +12,7 @@ import android.util.Log;
 import br.com.thiagopagonha.labirinthos.data.LevelData;
 import br.com.thiagopagonha.labirinthos.factory.GameResourcesFactory;
 import br.com.thiagopagonha.labirinthos.factory.ItemFactory;
+import br.com.thiagopagonha.labirinthos.navigation.Navigation;
 
 /**
  * Cena principal e implementação do jogo
@@ -22,6 +23,7 @@ public class GameScene extends SceneControls {
 
 	private static final String TAG = "GameScene";
 
+	private Navigation navigation;
 	private LevelData levelData;
 	private HUD gameHUD;
 	
@@ -44,6 +46,14 @@ public class GameScene extends SceneControls {
 		
 		// -- Inicializa o Heads Up Display
 		createHUD();
+		
+		// -- Procura e cria a cena inicial
+		initScene();
+		
+	}
+
+	private void initScene() {
+		
 		
 	}
 
