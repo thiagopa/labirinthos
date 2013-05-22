@@ -48,6 +48,7 @@ public class GameScene extends SceneControls {
 	}
 
 	private void createHUD() {
+		Log.i(TAG, "createHUD()");
 		gameHUD = new HUD();
 
 		// -- Título da fase
@@ -60,16 +61,16 @@ public class GameScene extends SceneControls {
 		leftButton.setPosition(150, 220);
 		attachToHud(leftButton);
 		
-		IMenuItem rightButton = get(ItemFactory.class).createTextMenuItem(0, ">", new ControlNavigation());
+		IMenuItem rightButton = get(ItemFactory.class).createTextMenuItem(1, ">", new ControlNavigation());
 		rightButton.setPosition(630, 220);
 		attachToHud(rightButton);
 
-		IMenuItem bottomButton = get(ItemFactory.class).createTextMenuItem(0, "v", new ControlNavigation());
+		IMenuItem bottomButton = get(ItemFactory.class).createTextMenuItem(2, "v", new ControlNavigation());
 		bottomButton.setPosition(380, 390);
 		bottomButton.setRotation(180);
 		attachToHud(bottomButton);
 		
-		IMenuItem topButton = get(ItemFactory.class).createTextMenuItem(0, "v", new ControlNavigation());
+		IMenuItem topButton = get(ItemFactory.class).createTextMenuItem(3, "v", new ControlNavigation());
 		topButton.setPosition(380, 30);
 		attachToHud(topButton);
 		
