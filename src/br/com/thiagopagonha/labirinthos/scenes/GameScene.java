@@ -8,6 +8,7 @@ import org.andengine.entity.text.Text;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.util.color.Color;
 
+import android.util.Log;
 import br.com.thiagopagonha.labirinthos.data.LevelData;
 import br.com.thiagopagonha.labirinthos.factory.GameResourcesFactory;
 import br.com.thiagopagonha.labirinthos.factory.ItemFactory;
@@ -18,6 +19,8 @@ import br.com.thiagopagonha.labirinthos.factory.ItemFactory;
  * @version Abr/2013
  */
 public class GameScene extends SceneControls {
+
+	private static final String TAG = "GameScene";
 
 	private LevelData levelData;
 	private HUD gameHUD;
@@ -54,28 +57,21 @@ public class GameScene extends SceneControls {
 		
 		// -- Botões da tela
 		IMenuItem leftButton = get(ItemFactory.class).createTextMenuItem(0, "<", new ControlNavigation());
+		leftButton.setPosition(150, 220);
+		attachToHud(leftButton);
 		
-		registerTouchArea(leftButton);
-		leftButton.setPosition(170, 220);
-		attachChild(leftButton);
-
 		IMenuItem rightButton = get(ItemFactory.class).createTextMenuItem(0, ">", new ControlNavigation());
-		
-		registerTouchArea(rightButton);
-		rightButton.setPosition(610, 220);
-		attachChild(rightButton);
+		rightButton.setPosition(630, 220);
+		attachToHud(rightButton);
 
-		IMenuItem bottomButton = get(ItemFactory.class).createTextMenuItem(0, "^", new ControlNavigation());
+		IMenuItem bottomButton = get(ItemFactory.class).createTextMenuItem(0, "v", new ControlNavigation());
+		bottomButton.setPosition(380, 390);
+		bottomButton.setRotation(180);
+		attachToHud(bottomButton);
 		
-		registerTouchArea(bottomButton);
-		bottomButton.setPosition(380, 380);
-		attachChild(bottomButton);
-
 		IMenuItem topButton = get(ItemFactory.class).createTextMenuItem(0, "v", new ControlNavigation());
-		
-		registerTouchArea(topButton);
-		topButton.setPosition(380, 50);
-		attachChild(topButton);
+		topButton.setPosition(380, 30);
+		attachToHud(topButton);
 		
 		// -- Retângulo da tela
 		Entity rectangleScreen = get(ItemFactory.class).createRectangle(200, 100 , 400, 250, 4, Color.BLACK);
@@ -85,6 +81,14 @@ public class GameScene extends SceneControls {
 		Camera camera = get(Camera.class);
 		camera.setHUD(gameHUD);
 	}
+
+	private void attachToHud(IMenuItem iMenuItem) {
+		iMenuItem.setScale(2, 2);
+		
+		gameHUD.registerTouchArea(iMenuItem);
+		gameHUD.attachChild(iMenuItem);
+	}
+	
 	
 	/**
 	 * Controle da cena 
@@ -92,6 +96,9 @@ public class GameScene extends SceneControls {
 	 */
 	class ControlNavigation implements ItemFactory.ITouchArea {
 		public boolean onAreaTouched(TouchEvent pSceneTouchEvent,float pTouchAreaLocalX, float pTouchAreaLocalY) {
+			
+			Log.i(TAG, "Touched Coordenates X=" + pTouchAreaLocalX + " Y=" + pTouchAreaLocalY);
+			
 			return false;
 		}
 	}

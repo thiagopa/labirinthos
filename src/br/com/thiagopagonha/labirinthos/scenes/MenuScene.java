@@ -20,7 +20,7 @@ import br.com.thiagopagonha.labirinthos.factory.SpriteFactory;
  */
 public class MenuScene extends SceneControls {
 
-	public static final String TAG = "MenuScene";
+	private static final String TAG = "MenuScene";
 	
 	MenuScene(GameResourcesFactory gameResourcesFactory) {
 		super(gameResourcesFactory);
